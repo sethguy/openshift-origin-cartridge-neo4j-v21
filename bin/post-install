@@ -1,0 +1,5 @@
+#!/bin/bash -eu
+
+source /etc/jelastic/environment
+
+[ -d /opt/repo/logs ] && { rm -rf /opt/repo/logs; ln -s /opt/repo/versions/2.1/neo4j-2.1/data/log /opt/repo/logs; chown jelastic:jelastic /opt/repo/logs;  }
