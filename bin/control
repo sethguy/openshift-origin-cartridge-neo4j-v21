@@ -23,8 +23,7 @@ function is_running() {
 }
 
 function status() {
-    local neoproc=`ps aux | grep neo4j |grep -v grep`;
-    if [ -n "$neoproc" ]; then
+    if (is_running); then
         client_result "Neo4j is running"
     else
         client_result "Neo4J is not running"
