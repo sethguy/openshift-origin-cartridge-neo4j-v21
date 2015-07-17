@@ -32,6 +32,7 @@ function status() {
 
 function start() {
     if (is_running); then
+	echo "Neo4J server is already started";
         exit 0
     fi
 
@@ -45,6 +46,10 @@ function start() {
 }
 
 function stop() {
+	if ! (is_running); then
+		echo "Neo4j server is already stopped";
+		exit 0;
+	fi
         ps aux | grep neo4j | awk '{print $2}' | xargs kill -9 > /dev/null 2>&1; rm -f ${OPENSHIFT_NEO4J_DIR}/versions/$Version/neo4j-2.1/data/neo4j-service.pid;  
         if [ $? -eq 0 ]; then   
                 echo "Neo4j server stopped successfully"; return 0;
