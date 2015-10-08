@@ -3,20 +3,20 @@
 #source /etc/jelastic/environment
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
-NEO4J_BIN_DIR=${OPENSHIFT_NEO4J_DIR}/versions/$Version/neo4j-2.1/bin
+NEO4J_BIN_DIR=${OPENSHIFT_NEO4J_DIR}/versions/neo4j-2.1/bin
 
 STOPTIMEOUT=10
 FMT="%a %b %d %Y %H:%M:%S GMT%z (%Z)"
-PID=${OPENSHIFT_NEO4J_DIR}/versions/$Version/neo4j-2.1/data/neo4j-service.pid
+PID=${OPENSHIFT_NEO4J_DIR}/versions/neo4j-2.1/data/neo4j-service.pid
 
 
 NEO4J_CLI="-host $OPENSHIFT_NEO4J_DB_HOST -port $OPENSHIFT_NEO4J_DB_PORT"
 
 function is_running() {
     if [ -f $PID ]; then
-        local neo4j_pid=`cat ${OPENSHIFT_NEO4J_DIR}/versions/$Version/neo4j-2.1/data/neo4j-service.pid`;
+        local neo4j_pid=`cat ${OPENSHIFT_NEO4J_DIR}/versions/neo4j-2.1/data/neo4j-service.pid`;
         local neo4j_proc_string=`ps aux | grep $neo4j_pid | grep neo | grep -v grep`;
-        [ -z "$neo4j_proc_string" ] && { rm -f ${OPENSHIFT_NEO4J_DIR}/versions/$Version/neo4j-2.1/data/neo4j-service.pid; return 1; }
+        [ -z "$neo4j_proc_string" ] && { rm -f ${OPENSHIFT_NEO4J_DIR}/versions/neo4j-2.1/data/neo4j-service.pid; return 1; }
         return 0;
     fi
     return 1;
@@ -50,7 +50,7 @@ function stop() {
 		echo "Neo4j server is already stopped";
 		exit 0;
 	fi
-        ps aux | grep neo4j | awk '{print $2}' | xargs kill -9 > /dev/null 2>&1; rm -f ${OPENSHIFT_NEO4J_DIR}/versions/$Version/neo4j-2.1/data/neo4j-service.pid;  
+        ps aux | grep neo4j | awk '{print $2}' | xargs kill -9 > /dev/null 2>&1; rm -f ${OPENSHIFT_NEO4J_DIR}/versions/neo4j-2.1/data/neo4j-service.pid;  
         if [ $? -eq 0 ]; then   
                 echo "Neo4j server stopped successfully"; return 0;
         fi
