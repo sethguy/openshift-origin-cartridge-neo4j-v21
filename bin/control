@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /etc/jelastic/environment
+#source /etc/jelastic/environment
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 NEO4J_BIN_DIR=${OPENSHIFT_NEO4J_DIR}/versions/$Version/neo4j-2.1/bin
